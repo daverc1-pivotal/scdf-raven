@@ -43,7 +43,7 @@ public class DfSinkJdbcApplication {
 			      myr.save(new MessageStore("This is Another Test"));
 			      myr.save(new MessageStore("This is Yet Another Test"));
 			      logger.debug("record count: {}", myr.count());
-            //omg... Brixton needs 1.7 backward compatible code. Why!
+            //Streams needs 1.7 backward compatible code. Why!
 			      //myr.findAll().forEach(x -> logger.debug(x.toString()));
             logger.debug(Arrays.toString((myr.findAll()).toArray()));
 		    };

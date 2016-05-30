@@ -1,0 +1,80 @@
+// dataflow 1.2.0.M1 log opened at 2016-05-29 16:45:15
+dataflow config server http://dataflow-server.local.pcfdev.io
+module list
+// [failed] module import --uri file:///Users/cdaver/work/scdf-raven/module_custom.properties --local TRUE
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+module list
+stream create --name mysqlstream --definition "source-sample | sink-mysql --spring.datasource.url='jdbc:mysql://mysql.local.pcfdev.io:3306/cf_380c842c_38fb_4582_9ec1_7274189d8c11' --spring.datasource.username=DRk7LJmvOwB0rVQ9 --spring.datasource.password=ZvZ4X7XtAzAgxFJL" --deploy
+stream list
+stream all destroy
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+stream create --name simple --definition "source-sample | sink-mysql --spring.datasource.url='jdbc:mysql://mysql.local.pcfdev.io:3306/cf_380c842c_38fb_4582_9ec1_7274189d8c11' --spring.datasource.username=DRk7LJmvOwB0rVQ9 --spring.datasource.password=ZvZ4X7XtAzAgxFJL" --deploy
+stream list
+stream all destroy
+stream list
+quit
+// dataflow 1.2.0.M1 log closed at 2016-05-29 20:02:34
+// dataflow 1.2.0.M1 log opened at 2016-05-29 20:29:48
+dataflow config server http://dataflow-server.local.pcfdev.io
+module list
+// [failed] module unregister sink-mysql
+module unregister sink-mysql:sink
+module list
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+module list
+module unregister sink-mysql:sink
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+stream create --name simple --definition "source-sample | sink-mysql --spring.datasource.url='jdbc:mysql://mysql.local.pcfdev.io:3306/cf_380c842c_38fb_4582_9ec1_7274189d8c11' --spring.datasource.username=DRk7LJmvOwB0rVQ9 --spring.datasource.password=ZvZ4X7XtAzAgxFJL" --deploy
+stream list
+stream all destroy
+module unregister sink-mysql:sink
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+stream create --name simple --definition "source-sample | sink-mysql" --deploy
+stream all destroy
+module unregister sink-mysql:sink
+module list
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+stream create --name simple --definition "source-sample | sink-mysql" --deploy
+stream all destroy
+module unregister sink-mysql:sink
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+stream create --name simple --definition "source-sample | sink-mysql" --deploy
+stream all destroy
+module unregister sink-mysql:sink
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+stream create --name simple --definition "source-sample | sink-mysql" --deploy
+stream all destroy
+module unregister sink-mysql:sink
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+stream create --name simple --definition "source-sample | sink-mysql" --deploy
+stream all destroy
+module unregister sink-mysql:sink
+quit
+// dataflow 1.2.0.M1 log closed at 2016-05-30 03:33:13
+// dataflow 1.2.0.M1 log opened at 2016-05-30 15:39:00
+dataflow config server http://dataflow-server.local.pcfdev.io
+module list
+// [failed] module unregister sink-mysql
+module unregister sink-mysql:sink
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+// [failed] stream create --name simple --definition "source-sample | sink-dataflow" --deploy
+module list
+// [failed] stream create --name simple --definition "source-sample | sink-bootdemo" --deploy
+stream all destroy
+stream create --name simple --definition "source-sample | sink-bootdemo" --deploy
+stream list
+stream all destroy
+module unregister sink-mysql:sink
+module unregister sink-bootdeno:sink
+module unregister sink-bootdemo:sink
+module list
+module import --uri file:///Users/cdaver/work/scdf-raven/df-shell/module_custom.properties --local TRUE
+stream create --name simple --definition "source-sample | sink-bootdemo" --deploy
+stream all destroy
+module unregister sink-bootdemo:sink
+module list
+module unregister sink-mysql:sink
+module list
+quit
+// dataflow 1.2.0.M1 log closed at 2016-05-30 16:17:32
