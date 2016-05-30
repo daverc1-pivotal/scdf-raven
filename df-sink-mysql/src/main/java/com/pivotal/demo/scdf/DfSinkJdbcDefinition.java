@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.integration.annotation.MessageEndpoint;
-import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -18,18 +18,19 @@ import java.util.Map;
 @EnableBinding(Sink.class)
 public class DfSinkJdbcDefinition{
 
-  public static Logger LOG = LoggerFactory.getLogger(DfSinkJdbcDefinition.class);
+  public static Logger logger = LoggerFactory.getLogger(DfSinkJdbcDefinition.class);
 
   @Autowired
   private MyRepository myRepository;
 
-  @StreamListener(Sink.INPUT)
-  public void handleMessage(String message) {
-    LOG.info(message);
+  @ServiceActivator(inputChannel=Sink.INPUT)
+	public void handleMessage(Object payload) {
+		logger.info("Received: " + payload);
     try{
+      String message = payload+"";
       myRepository.save(new MessageStore(message));
     }catch(Exception e){
-      LOG.error(e.getMessage());
+      logger.error("Error :: "+e);
     }
   }
 }
