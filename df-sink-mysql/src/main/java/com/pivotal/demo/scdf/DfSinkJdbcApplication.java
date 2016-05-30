@@ -3,6 +3,7 @@ package com.pivotal.demo.scdf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -28,6 +29,13 @@ import java.util.Map;
 @EnableBinding(Sink.class)
 @SpringBootApplication
 public class DfSinkJdbcApplication {
+
+    @Bean
+    CommandLineRunner runner(MyRepository myr) {
+        return args -> {
+            myr.save(new MessageStore("This is a Test"));
+        };
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(DfSinkJdbcApplication.class, args);
