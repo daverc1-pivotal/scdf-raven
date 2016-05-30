@@ -1,0 +1,12 @@
+---
+applications:
+- name: simple-sink-mysql
+  memory: 512M
+  instances: 1
+  host: simple-sink-mysql
+  path: target/df-sink-mysql-0.0.1-SNAPSHOT.jar
+  services:
+   - redis
+   - rabbitmq
+   - mysql
+buildpack: https://github.com/cloudfoundry/java-buildpack

@@ -19,9 +19,7 @@ import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
@@ -30,49 +28,25 @@ import java.util.Map;
 @SpringBootApplication
 public class DfSinkJdbcApplication {
 
+    public static Logger LOG = LoggerFactory.getLogger(DfSinkJdbcApplication.class);
+
+    @Autowired
+    private MyRepository myRepository;
+
+    public static void main(String[] args) {
+        SpringApplication.run(DfSinkJdbcApplication.class, args);
+    }
+
+    @ServiceActivator(inputChannel = Sink.INPUT)
+    public void handleMessage(@Payload String message, @Headers Map<String, Object> headers) {
+			LOG.info(message);
+      myRepository.save(new MessageStore(message));
+    }
+
     @Bean
     CommandLineRunner runner(MyRepository myr) {
         return args -> {
             myr.save(new MessageStore("This is a Test"));
         };
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(DfSinkJdbcApplication.class, args);
-    }
-}
-
-@MessageEndpoint
-class MyMessageReceiver {
-    @Autowired
-    private MyRepository myRepository;
-    public static Logger LOG = LoggerFactory.getLogger(MyMessageReceiver.class);
-    @ServiceActivator(inputChannel = Sink.INPUT)
-    public void handleMessage(@Payload String message, @Headers Map<String, Object> headers) {
-			LOG.info(message);
-      this.myRepository.save(new MessageStore(message));
-    }
-}
-
-@RepositoryRestResource
-interface MyRepository extends JpaRepository<MessageStore, Long> {
-}
-
-@Entity
-class MessageStore {
-
-    @Id
-    @GeneratedValue
-    private Long id;
-    private String message;
-
-    MessageStore() {}
-
-    public MessageStore(String message) { this.message = message; }
-    public Long getId() { return id; }
-    public String getMessage() { return message; }
-    @Override
-    public String toString() {
-        return "MessageStore{" +"id=" + id +", message='" + message + '\'' +'}';
     }
 }
