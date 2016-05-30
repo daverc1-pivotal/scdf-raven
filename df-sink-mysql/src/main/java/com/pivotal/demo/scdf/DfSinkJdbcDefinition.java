@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.integration.annotation.MessageEndpoint;
-import org.springframework.integration.annotation.ServiceActivator;
+import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -23,8 +23,8 @@ public class DfSinkJdbcDefinition{
   @Autowired
   private MyRepository myRepository;
 
-  @ServiceActivator(inputChannel = Sink.INPUT)
-  public void handleMessage(@Payload String message, @Headers Map<String, Object> headers) {
+  @StreamListener(Sink.INPUT)
+  public void handleMessage(String message) {
     LOG.info(message);
     try{
       myRepository.save(new MessageStore(message));
