@@ -42,31 +42,29 @@ class MyMessageReceiver {
     @ServiceActivator(inputChannel = Sink.INPUT)
     public void handleMessage(@Payload String message, @Headers Map<String, Object> headers) {
 			LOG.info(message);
-      String[] parts = message.split(":");
-      LOG.info(parts[1]);
-      this.myRepository.save(new Names(parts[1]));
+      this.myRepository.save(new MessageStore(message));
     }
 }
 
 @RepositoryRestResource
-interface MyRepository extends JpaRepository<Names, Long> {
+interface MyRepository extends JpaRepository<MessageStore, Long> {
 }
 
 @Entity
-class Names {
+class MessageStore {
 
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
+    private String message;
 
-    Names() {}
+    MessageStore() {}
 
-    public Names(String name) { this.name = name; }
+    public MessageStore(String message) { this.message = message; }
     public Long getId() { return id; }
-    public String getName() { return name; }
+    public String getMessage() { return message; }
     @Override
     public String toString() {
-        return "Names{" +"id=" + id +", name='" + name + '\'' +'}';
+        return "MessageStore{" +"id=" + id +", message='" + message + '\'' +'}';
     }
 }
