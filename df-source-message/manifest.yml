@@ -1,0 +1,10 @@
+---
+applications:
+- name: streamdemoredis
+  memory: 512M
+  instances: 1
+  host: streamdemoredis
+  path: target/streamDemoRedis-0.0.1-SNAPSHOT.jar
+  services:
+  - cdaver-redis
+buildpack: https://github.com/cloudfoundry/java-buildpack
