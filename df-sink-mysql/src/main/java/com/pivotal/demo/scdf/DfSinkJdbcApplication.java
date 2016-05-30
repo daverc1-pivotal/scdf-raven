@@ -43,6 +43,7 @@ class MyMessageReceiver {
     public void handleMessage(@Payload String message, @Headers Map<String, Object> headers) {
 			LOG.info(message);
       String[] parts = message.split(":");
+      LOG.info(parts[1]);
       this.myRepository.save(new Names(parts[1]));
     }
 }

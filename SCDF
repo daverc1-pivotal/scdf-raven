@@ -11,6 +11,7 @@ dataflow:>stream create --name pmmlTest --definition "http --server.port=9001 | 
 scdf-raven
 
 stream create --name test --definition "source-sample | sink-sample" --deploy
+stream create --name mysqlstream --definition "source-sample | sink-mysql --spring.datasource.url='jdbc:mysql://mysql.local.pcfdev.io:3306/cf_380c842c_38fb_4582_9ec1_7274189d8c11' --spring.datasource.username=DRk7LJmvOwB0rVQ9 --spring.datasource.password=ZvZ4X7XtAzAgxFJL --deploy
 Creates a simple stream that consumes an HTTP request and writes to rabbitmq before forwarding to Sink (RDBMS/KV/BUS/).
 
 stream create --definition ":test.source-sample > counter" --name tap_at_http --deploy
