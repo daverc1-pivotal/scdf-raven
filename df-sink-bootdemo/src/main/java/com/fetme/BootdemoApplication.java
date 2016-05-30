@@ -91,7 +91,7 @@ public class BootdemoApplication {
      *
      * @param gr
      * @return
-     */
+
     @Bean
     CommandLineRunner loadDatabase(GreetingRepository gr) {
         return args -> {
@@ -104,7 +104,7 @@ public class BootdemoApplication {
         };
 
     }
-
+    */
     @ServiceActivator(inputChannel=Sink.INPUT)
     public void process(@Payload String message, @Headers Map<String, Object> headers){
         Greeting greeting = new Greeting(message);

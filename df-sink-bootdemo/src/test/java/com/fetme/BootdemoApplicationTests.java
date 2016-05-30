@@ -25,6 +25,9 @@ public class BootdemoApplicationTests {
     @Autowired
     BootdemoApplication application;
 
+    @Autowired
+    GreetingRepository greetingRepository;
+
 //    @Test
 //    public void validGreetingId() {
 //        Logger.getGlobal().info("Start validGreetingId test");
@@ -38,7 +41,9 @@ public class BootdemoApplicationTests {
     @Test
     public void validGreetingText() {
         Logger.getGlobal().info("Start validGreetingText test");
-        Greeting greeting = application.findByTitle("Hello");
+        Greeting greeting = new Greeting("Hello");
+        greetingRepository.save(greeting);
+        greeting = application.findByTitle("Hello");
 
         Assert.assertNotNull(greeting);
         Assert.assertEquals(ACCOUNT_1_NAME, greeting.getTitle());
