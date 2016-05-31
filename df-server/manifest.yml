@@ -2,9 +2,8 @@
 applications:
 - name: dataflow-server
   host: dataflow-server
-  memory: 1G
   instances: 1
-  path: target/df-server-0.0.1-SNAPSHOT.jar
+  path: spring-cloud-dataflow-server-cloudfoundry-1.0.0.BUILD-SNAPSHOT.jar
   env:
     SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_API_ENDPOINT: https://api.local.pcfdev.io
     SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_ORGANIZATION: pcfdev-org
@@ -14,8 +13,6 @@ applications:
     SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_USERNAME: admin
     SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_PASSWORD: admin
     SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_SKIP_SSL_VALIDATION: true
-    SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_MEMORY: 512M
-    SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_DISK: 512M
   services:
   - rabbitmq
   - redis

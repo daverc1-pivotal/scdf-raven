@@ -20,6 +20,7 @@ import org.springframework.integration.annotation.MessageEndpoint;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.Message;
 
 import javax.validation.Valid;
 import java.util.logging.Logger;
@@ -106,8 +107,10 @@ public class BootdemoApplication {
     }
     */
     @ServiceActivator(inputChannel=Sink.INPUT)
-    public void process(@Payload String message, @Headers Map<String, Object> headers){
-        Greeting greeting = new Greeting(message);
+    public void process(Message<?> message){
+        logger.info("Calling service activator");
+        Object title = message.getPayload();
+        Greeting greeting = new Greeting(title+"");
         greeting = greetingRepository.save(greeting);
         logger.info("Added greeting " + greeting.getId());
     }
