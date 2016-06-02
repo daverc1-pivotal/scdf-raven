@@ -34,4 +34,9 @@ stream deploy tweets
 
 Standard jdbc
 
-stream create --name mysqlstream --definition "http | jdbc --spring.datasource.url='jdbc:mysql://mysql.local.pcfdev.io:3306/cf_34c9b184_54cf_4b7b_9c37_4bfa061f2477' --spring.datasource.username=umRt0YzsyOXFN5Js --spring.datasource.password=DXVkGydIimDC4A4K --tableName=names --columns=name" --deploy
+stream create --name mysqlstream --definition "http |
+jdbc
+--spring.datasource.url='jdbc:mysql://mysql.local.pcfdev.io:3306/cf_34c9b184_54cf_4b7b_9c37_4bfa061f2477'
+--spring.datasource.username=umRt0YzsyOXFN5Js
+--spring.datasource.password=DXVkGydIimDC4A4K
+--tableName=names --columns=name" --deploy

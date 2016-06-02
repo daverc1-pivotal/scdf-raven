@@ -90,9 +90,9 @@ public class BootdemoApplication {
      *
      * Loads the database on startup
      *
-     * @param gr
+     * @param
      * @return
-
+     */
     @Bean
     CommandLineRunner loadDatabase(GreetingRepository gr) {
         return args -> {
@@ -101,31 +101,23 @@ public class BootdemoApplication {
             gr.save(new Greeting("Hola"));
             gr.save(new Greeting("Bonjour"));
             logger.debug("record count: {}", gr.count());
-            gr.findAll().forEach(x -> logger.debug(x.toString()));
+            //gr.findAll().forEach(x -> logger.debug(x.toString()));
         };
 
     }
-    */
+
     @ServiceActivator(inputChannel=Sink.INPUT)
-    public void process(Message<?> message){
+    public void process(@Payload String message, @Headers Map<String, Object> headers) {
         logger.info("Calling service activator");
-        Object title = message.getPayload();
-        Greeting greeting = new Greeting(title+"");
+        logger.info("message :: "+message);
+        for(Map.Entry e : headers.entrySet()) {
+            logger.info('\t' + e.getKey().toString()  + '=' + e.getValue());
+        }
+
+        Greeting greeting = new Greeting(message);
         greeting = greetingRepository.save(greeting);
         logger.info("Added greeting " + greeting.getId());
     }
-
-    // //For SCDF
-    // @Bean
-    // CommandLineRunner loadscdfDatabase(NamesRepository nr) {
-    //     return args -> {
-    //         logger.debug("loading database..");
-    //         nr.save(new Names("1","Carl"));
-    //         logger.debug("record count: {}", nr.count());
-    //         nr.findAll().forEach(x -> logger.debug(x.toString()));
-    //     };
-    //
-    // }
 
     public static void main(String[] args) {
         SpringApplication.run(BootdemoApplication.class, args);
