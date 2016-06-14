@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.pivotal.comcast.scfd</groupId>
+	<artifactId>scdf-raven</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>scdf-raven</name>
+	<description>Demo project for Spring Boot</description>
+
+	<modules>
+		<module>df-server</module>
+		<module>df-shell</module>
+		<module>df-sink-bootdemo</module>
+		<module>df-sink-jdbc</module>
+		<module>df-sink-mysql</module>
+		<module>df-source-sample</module>
+		<module>df-sink-sample</module>
+	</modules>
+
+</project>
